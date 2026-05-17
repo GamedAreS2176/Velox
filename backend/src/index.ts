@@ -1,9 +1,14 @@
-import "dotenv/config";
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import { router } from './controllers/auth.js';
 
 const prisma = new PrismaClient();
 const app=express();
+
+app.use(express.json());
+app.use(router);
 
 app.get('/',(req,res)=>{
     return res.status(200).json({ msg:"all good" });
